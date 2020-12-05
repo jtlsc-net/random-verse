@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>JESUS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif}
+</style>
+<body>
+
+    
+    <!-- Page content -->
+    <!-- <div class="w3-content" style="max-width:2000px;margin-top:46px"> -->
+    <!-- Navbar -->
+    <!-- <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+            <a href="#bible" class="w3-bar-item w3-button w3-padding-large w3-hide-small">BIBLE</a>
+        </div>
+        </div> -->
+
+    <!-- The BIble Section -->
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="bible">
+        <h2 class="w3-wide w3-center">BIBLE</h2>
+        <p class="w3-opacity w3-center"><i>Generate a random verse number!</i></p>
+        <button id="random" class="w3-button w3-black w3-left" type="button">GENERATE</button>
+        <p id="display" class="w3-right"></p>
+    </div>
+    
+    <!-- End Page Content -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <p class="w3-medium">Also powered by Jesus</p>
+    </footer>
+    <script>
+        document.getElementById("random").onclick = function () {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var myObj = JSON.parse(this.responseText);
+                var bookNum = Math.floor(Math.random() * 66);
+                var chapNum = Math.floor(Math.random() * myObj[bookNum].chapters.length) + 1;
+                var verseNum = Math.floor(Math.random() * myObj[bookNum].chapters[chapNum - 1].verses) + 1;
+                document.getElementById("display").innerHTML = myObj[bookNum].book + ' ' + chapNum + ':' + verseNum;
+                console.log(myObj[0]);
+            }
+            };
+            xmlhttp.open("GET", "verses.json", true);
+            xmlhttp.send();
+        };
+    </script>
+
+    </body>
+</html>
